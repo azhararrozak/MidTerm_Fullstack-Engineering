@@ -10,7 +10,7 @@
 # API structure
 - Create Videos Data : /videos
 - Get One Videos Data : /videos/[id]
-- Get All Videos Data: /videos
+- Get All Videos Data: /videosAll
 - Update Videos Data: /videos/[id]
 - Delete Videos Data:/videos/[id]
 # List API request and response
