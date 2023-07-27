@@ -14,7 +14,7 @@
 - Update Videos Data: /videos/[id]
 - Delete Videos Data:/videos/[id]
 # List API request and response
-Gist: https://gist.github.com/azhararrozak/ba5e63ce0c24df86e8933617fa1abddd
+Gist: [Link](https://gist.github.com/azhararrozak/ba5e63ce0c24df86e8933617fa1abddd)
 # How to run locally
 - Install Packages
   
