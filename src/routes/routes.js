@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const Videos = require("../models/Videos");
+const Comment = require("../models/Comment")
 
-router.post("/videos", (req, res) => {
+router.post("/videos", async (req, res) => {
     const video = new Videos({
         title: req.body.title,
         description: req.body.description,
@@ -13,10 +14,33 @@ router.post("/videos", (req, res) => {
     });
 
     try {
-        const savedVideo = video.save();
+        const savedVideo = await video.save();
         res.status(200).json(savedVideo);
     } catch (error) {
         res.status(400).json({ message: error });
+    }
+});
+
+router.post('/videos/:id/comments', async (req, res) => {
+    try {
+        const video = await Videos.findById(req.params.id);
+
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
+        }
+
+        const comment = new Comment({
+            text: req.body.text,
+            video: video._id,
+        });
+
+        const newComment = await comment.save();
+        video.comments.push(newComment);
+        await video.save();
+
+        res.status(201).json(newComment);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 });
 
@@ -32,7 +56,7 @@ router.get("/videosAll", async (req, res) => {
 
 router.get("/videos/:id", async (req, res) => {
     try {
-        const video = await Videos.findById(req.params.id);
+        const video = await Videos.findById(req.params.id).populate('comments');
         res.status(200).json(video);
     } catch (error) {
         res.status(500).json({ message: error });
