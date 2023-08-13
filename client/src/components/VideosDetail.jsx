@@ -17,7 +17,6 @@ const VideosDetail = () => {
       .catch((error) => console.log(error));
   }, [videos]);
 
-  console.log(videos)
 
   return (
     <div className="flex justify-center items-center h-screen flex-col">
@@ -37,7 +36,7 @@ const VideosDetail = () => {
         <ul>
           {videos.comments &&
             videos.comments.map((comment) => (
-              <li key={comment._id}>{comment.text}</li>
+              <li className="border-b-4 pt-2" key={comment._id}>{comment.text}</li>
             ))}
         </ul>
       </div>

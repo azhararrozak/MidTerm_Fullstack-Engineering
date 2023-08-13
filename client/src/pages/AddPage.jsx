@@ -2,8 +2,10 @@ import DataForm from "../components/DataForm";
 import Header from "../components/Header";
 import axios from 'axios';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddPage = () => {
+  const navigate = useNavigate();
   const [responseMessage, setResponseMessage] = useState("");
 
   const handleSubmit = async (newData) => {
@@ -19,6 +21,8 @@ const AddPage = () => {
 
       // Set response message
       setResponseMessage("Data successfully submitted.");
+
+      navigate('/')
     } catch (error) {
       console.error("Error submitting data:", error);
 

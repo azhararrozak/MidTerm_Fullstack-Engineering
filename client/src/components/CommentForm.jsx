@@ -34,8 +34,8 @@ const CommentForm = ({id}) => {
 
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-[800px]">
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="bg-white w-[800px]">
+      <div className="mb-4 mt-2 flex">
         <input
           type="text"
           id="text"
@@ -44,13 +44,14 @@ const CommentForm = ({id}) => {
           onChange={handleChange}
           className="w-full border rounded p-2"
         />
-      </div>
-      <button
+        <button
         type="submit"
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+        className="bg-blue-500 text-white mx-2 px-2 rounded hover:bg-blue-700"
       >
-        Submit
+        Post Comment
       </button>
+      </div>
+      
     </form>
   )
 }
