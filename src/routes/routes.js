@@ -4,6 +4,7 @@ const router = express.Router();
 
 const Videos = require("../models/Videos");
 const Comment = require("../models/Comment")
+const Product = require("../models/Product")
 
 router.post("/videos", async (req, res) => {
     const video = new Videos({
@@ -31,6 +32,7 @@ router.post('/videos/:id/comments', async (req, res) => {
 
         const comment = new Comment({
             text: req.body.text,
+            username: req.body.username,
             video: video._id,
         });
 
@@ -44,6 +46,30 @@ router.post('/videos/:id/comments', async (req, res) => {
     }
 });
 
+router.post('/videos/:id/products', async (req, res) => {
+    try {
+        const video = await Videos.findById(req.params.id);
+
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
+        }
+
+        const product = new Product({
+            linkProduct: req.body.linkProduct,
+            title: req.body.title,
+            price: req.body.price,
+            video: video._id,
+        });
+
+        const newProduct = await product.save();
+        video.products.push(newProduct);
+        await video.save();
+        res.status(201).json(newProduct);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+})
+
 
 router.get("/videosAll", async (req, res) => {
     try {
@@ -56,7 +82,7 @@ router.get("/videosAll", async (req, res) => {
 
 router.get("/videos/:id", async (req, res) => {
     try {
-        const video = await Videos.findById(req.params.id).populate('comments');
+        const video = await Videos.findById(req.params.id).populate('comments').populate('products');;
         res.status(200).json(video);
     } catch (error) {
         res.status(500).json({ message: error });

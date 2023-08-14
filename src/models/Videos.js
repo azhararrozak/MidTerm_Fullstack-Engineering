@@ -26,6 +26,10 @@ const videoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment',
     }],
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }]
 });
 
 module.exports = mongoose.model('Video', videoSchema);

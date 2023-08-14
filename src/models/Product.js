@@ -1,12 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const commentSchema = new mongoose.Schema({
-    text: {
+// linkProduct, Title, Price
+const productSchema = new mongoose.Schema({
+    linkProduct: {
         type: String,
         required: true,
     },
-    username: {
+    title: {
         type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
         required: true,
     },
     video: {
@@ -20,5 +25,4 @@ const commentSchema = new mongoose.Schema({
     }
 });
 
-
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Product', productSchema);
