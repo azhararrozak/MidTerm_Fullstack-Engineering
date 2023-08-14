@@ -15,7 +15,7 @@ dbs.on('error', (err) => console.log(err));
 dbs.once('open', () => console.log('Connected to database'));
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const corsOptions = {
     origin: '*',
 }
